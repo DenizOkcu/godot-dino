@@ -18,9 +18,9 @@ func _process(delta):
 	if isJumping == false:
 		if Input.is_action_just_pressed("ui_accept") && isDead == false:
 			isJumping = true
-			jumpSpeed = dinoAcceleration * delta
+			jumpSpeed = dinoAcceleration
 	else:
-		jumpSpeed -= dinoGravity * delta
+		jumpSpeed -= dinoGravity
 		
 	if isJumping == true:
 		if jumpSpeed > 0:
@@ -37,7 +37,7 @@ func _process(delta):
 		else:
 			$AnimationPlayer.play("Dead")
 	
-	global_position.y -= jumpSpeed
+	global_position.y -= jumpSpeed * delta
 
 func reset():
 	isDead = false
