@@ -19,17 +19,21 @@ func _ready():
 func start_game():
 	gameStarted = true
 	speed = 260
-	
-	$Dino.get_node("AnimationPlayer").play("Run")
+	self.score = 0
 	
 	$CactusTimer.set_wait_time(1)
 	$CactusTimer.start()
 	
 	$SpeedTimer.start()
 	
+	$Dino.reset()
+	$Dino.get_node("AnimationPlayer").play("Run")
+	
 func reset_game():
 	gameStarted = false
 	speed = 0
+	
+	get_tree().call_group("Cacti", "queue_free")
 	
 	$Floor1.global_position.x = 0
 	$Floor2.global_position.x = $Floor1.texture.get_size().x
@@ -39,11 +43,13 @@ func reset_game():
 		cactus.set_speed(0)
 	
 	$Dino.get_node("AnimationPlayer").play("Idle")
+
 	$SpeedTimer.stop()
 	$CactusTimer.stop()
 	
+	$GameOverLabel.visible = false
+	
 func score_set(value):
-	print(value)
 	score = value
 	$ScoreLabel.text = "score: " + str(score)
 
@@ -65,8 +71,15 @@ func _on_CactusTimer_timeout():
 	$CactusTimer.set_wait_time(randomNumberGenerator.randi_range(1, 4))
 
 func _on_cactus_exited_screen():
-	self.score += 1
+	if gameStarted == true:
+		self.score += 1
 	
 func _on_Dino_death():
 	reset_game()
 	$Dino.get_node("AnimationPlayer").play("Dead")
+	$GameOverLabel.visible = true
+
+
+func _on_Button_pressed():
+	reset_game()
+	start_game()
