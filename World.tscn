@@ -26,6 +26,7 @@ wait_time = 25.0
 
 [node name="Dino" parent="." instance=ExtResource( 2 )]
 position = Vector2( 70, 200 )
+z_index = 1
 
 [node name="CactusTimer" type="Timer" parent="."]
 

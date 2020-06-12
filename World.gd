@@ -69,3 +69,4 @@ func _on_cactus_exited_screen():
 	
 func _on_Dino_death():
 	reset_game()
+	$Dino.get_node("AnimationPlayer").play("Dead")
