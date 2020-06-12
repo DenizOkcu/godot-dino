@@ -25,7 +25,7 @@ position = Vector2( 0, 225 )
 wait_time = 30.0
 
 [node name="Dino" parent="." instance=ExtResource( 2 )]
-position = Vector2( 60, 200 )
+position = Vector2( 70, 200 )
 
 [node name="CactusTimer" type="Timer" parent="."]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_Speed_Timer_timeout"]

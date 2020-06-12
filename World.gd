@@ -17,7 +17,7 @@ func _ready():
 
 func start_game():
 	gameStarted = true
-	speed = 200
+	speed = 300
 	
 	$Dino.get_node("AnimationPlayer").play("Run")
 	
