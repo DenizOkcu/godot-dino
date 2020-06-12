@@ -2,7 +2,7 @@ extends Node
 
 var speed = 0
 var maxSpeed = 1200
-var speedMultiplicator = 1.1
+var speedMultiplicator = 1.2
 
 var gameStarted = false
 
@@ -17,7 +17,7 @@ func _ready():
 
 func start_game():
 	gameStarted = true
-	speed = 300
+	speed = 260
 	
 	$Dino.get_node("AnimationPlayer").play("Run")
 	
@@ -33,8 +33,14 @@ func reset_game():
 	$Floor1.global_position.x = 0
 	$Floor2.global_position.x = $Floor1.texture.get_size().x
 	
+	var cacti = get_tree().get_nodes_in_group("Cacti")
+	
+	for cactus in cacti:
+		cactus.set_speed(0)
+	
 	$Dino.get_node("AnimationPlayer").play("Idle")
 	$SpeedTimer.stop()
+	$CactusTimer.stop()
 
 func _process(delta):
 	if gameStarted:
@@ -51,3 +57,7 @@ func _on_CactusTimer_timeout():
 	cactus.global_position = Vector2(700, (210 + randomNumberGenerator.randi_range(-5, 30)))
 	add_child(cactus)
 	$CactusTimer.set_wait_time(randomNumberGenerator.randi_range(1, 4))
+
+
+func _on_Dino_death():
+	reset_game()

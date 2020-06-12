@@ -1,9 +1,11 @@
 extends Area2D
 
+signal death
+
 var startingY
 var isJumping = false
 
-var dinoGravity = 35
+var dinoGravity = 30
 var dinoAcceleration = 700
 
 var jumpSpeed = 0
@@ -26,3 +28,7 @@ func _process(delta):
 	
 	global_position.y -= jumpSpeed
 
+
+
+func _on_Dino_area_entered(_area):
+	emit_signal("death")

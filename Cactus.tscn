@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://cactus_small.png" type="Texture" id=1]
 [ext_resource path="res://Cactus.gd" type="Script" id=2]
 
-[node name="Sprite" type="Sprite"]
-texture = ExtResource( 1 )
-hframes = 6
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 17.0
+height = 36.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 6
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 4.76837e-07, 0 )
+position = Vector2( 1.66893e-06, 1.41561e-06 )
 scale = Vector2( 1.7, 3.5 )
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="queue_free"]
