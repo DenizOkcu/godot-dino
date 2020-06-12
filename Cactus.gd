@@ -1,5 +1,7 @@
 extends Area2D
 
+signal exitedScreen
+
 var speed
 
 var randomNumberGenerator = RandomNumberGenerator.new()
@@ -17,3 +19,8 @@ func _process(delta):
 	
 func set_speed(distance):
 	speed = distance
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	emit_signal("exitedScreen")
+	queue_free()

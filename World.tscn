@@ -28,6 +28,18 @@ wait_time = 25.0
 position = Vector2( 70, 200 )
 
 [node name="CactusTimer" type="Timer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 408.0
+margin_right = 618.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "score: 0"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_Speed_Timer_timeout"]
 [connection signal="death" from="Dino" to="." method="_on_Dino_death"]
 [connection signal="timeout" from="CactusTimer" to="." method="_on_CactusTimer_timeout"]
