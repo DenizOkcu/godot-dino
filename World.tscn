@@ -6,7 +6,6 @@
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
-gameStarted = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -26,5 +25,8 @@ position = Vector2( 0, 225 )
 wait_time = 30.0
 
 [node name="Dino" parent="." instance=ExtResource( 2 )]
-position = Vector2( 60, 194 )
+position = Vector2( 60, 200 )
+
+[node name="CactusTimer" type="Timer" parent="."]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_Speed_Timer_timeout"]
+[connection signal="timeout" from="CactusTimer" to="." method="_on_CactusTimer_timeout"]
